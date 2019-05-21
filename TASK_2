@@ -36,11 +36,15 @@ INSERT INTO salary VALUES(2,'B','f',5500);
 INSERT INTO salary VALUES(3,'C','m',5000);
 INSERT INTO salary VALUES(4,'D','f',1500);
 INSERT INTO salary VALUES(5,'E','f',2000);
+set sql_safe_updates=0;#取消安全模式
 UPDATE salary
-SET sex = 
-CASE
+SET sex = CASE
 WHEN sex='f' THEN 'm'
 WHEN sex='m' THEN 'f'
 ELSE sex
 END;
 SELECT * FROM salary;
+
+或者方法二
+update salary set sex = if(sex='f','m','f') where id>0 ;#限制主键
+select * from salary;
